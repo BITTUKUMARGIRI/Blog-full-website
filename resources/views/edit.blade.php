@@ -123,7 +123,7 @@
 <body>
     
 @if(auth()->check() && auth()->id() == $post->user_id)
-    <a href="{{ route('posts.edit', $post->id) }}">Edit</a>
+    <a href="{{ route('edit', $post->id) }}">Edit</a>
 @endif
 
     <div class="navbar">

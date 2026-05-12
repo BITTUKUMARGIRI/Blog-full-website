@@ -16,31 +16,15 @@ class AdminController extends Controller
     public function create(Request $request){
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
-            'content' => 'required|string',]);
+            'description' => 'required|string',]);
         
-        $post = new Post();
-        $post->title = $validatedData['title'];
-        $post->content = $validatedData['content'];
-        $post->user_id = auth()->id();
-        $post->save();
-        return redirect()->route('welcome' )->with('success', 'Post created successfully!');
-    }
-   
-    public function store(Request $request)
-{
-    $request->validate([
-        'title' => 'required|string|max:255',
-        'content' => 'required|string',
-    ]);
-
-    Post::create([
-        'title' => $request->title,
-        'content' => $request->content,
+       Post::create([
+        'title' => $validatedData['title'],
+        'description' => $validatedData['description'],
         'user_id' => auth()->id(),
-    ]);
+    ]); return redirect()->route('welcome' )->with('success', 'Post created successfully!');
+    }
 
-    return redirect()->back()->with('success', 'Post created successfully');
-}
     public function edit($id)
     {
         $post = Post::where('id', $id)
@@ -52,14 +36,14 @@ class AdminController extends Controller
     {
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
-            'content' => 'required|string',
+            'description' => 'required|string',
         ]);
 
         $post = Post::where('id', $id)
                 ->where('user_id', auth()->id())
                 ->firstOrFail();
         $post->title = $validatedData['title'];
-        $post->content = $validatedData['content'];
+        $post->description = $validatedData['description'];
         $post->save();
 
         return redirect()->route('welcome')->with('success', 'Post updated successfully!');

@@ -155,11 +155,11 @@
             @enderror
 
             <textarea 
-                name="content"
+                name="description"
                 class="content-box" 
                 placeholder="Write your content here..."
             >{{ old('content') }}</textarea>
-            @error('content')
+            @error('description')
                 <div class="error-message">{{ $message }}</div>
             @enderror
 

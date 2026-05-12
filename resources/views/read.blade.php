@@ -205,7 +205,7 @@
                             <a href="{{ url('/posts/' . $post->id) }}">{{ $post->title }}</a>
                         </h3>
                         <div class="post-meta">
-                            Posted on {{ $post->created_at->format('M d, Y') }}
+                            Posted on {{ $post->created_at?->format('M d, Y') }}
                         </div>
                         <div class="post-content">
                             {!! Str::limit(strip_tags($post->content), 150) !!}

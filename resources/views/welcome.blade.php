@@ -242,6 +242,12 @@
                         <h2>Create</h2>
                         <p>Write a new blog post</p>
                     </div>
+                    <div class="section create" onclick="window.location.href='{{ url('/store') }}'">
+                        <h2>add video</h2>
+                        <p>UPLODE videos</p>
+                    </div>
+                    
+                    
                     <!-- <div class="section read" onclick="window.location.href='{{ url('/read') }}'">
                         <h2>Read</h2>
                         <p>Read blog posts</p>
@@ -253,7 +259,10 @@
                         <h2>Read</h2>
                         <p>Read blog posts</p>
                     </div>
-               
+                <div class="section create" onclick="window.location.href='{{ url('/video') }}'">
+                        <h2>WATCH video</h2>
+                        <p>Watch ALL videos</p>
+                    </div>
             
         </div>
     </div>

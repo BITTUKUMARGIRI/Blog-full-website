@@ -1,0 +1,40 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('videos', function (Blueprint $table) {
+    $table->id();
+    $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+    $table->foreignId('category_id')->nullable()->constrained()->nullOnDelete();
+    $table->string('title');
+    $table->string('slug')->unique();
+    $table->text('description')->nullable();
+    $table->string('thumbnail')->nullable();
+    $table->string('source_type')->default('uploaded');
+    $table->string('source_path')->nullable();
+    $table->string('hls_url')->nullable();
+    $table->integer('duration')->default(0);
+    $table->enum('visibility', ['free', 'premium'])->default('free');
+    $table->enum('status', ['draft', 'published'])->default('draft');
+    $table->timestamp('published_at')->nullable();
+    $table->timestamps();
+});
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        //
+    }
+};

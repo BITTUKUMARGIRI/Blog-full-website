@@ -161,12 +161,13 @@
             <a href="{{ url('/read ') }}" class="btn">Back to Posts</a>
         </div>
     </div>
-     @auth
-    @if(Auth::user()->role === 'admin')
+    @auth
+    @if(auth()->id() === $post->user_id)
         <div class="actions">
             <a href="{{ url('/posts/' . $post->id . '/edit') }}" class="btn">Edit Post</a>
         </div>
     @endif
+
 @endauth
 
     <div class="paper">
