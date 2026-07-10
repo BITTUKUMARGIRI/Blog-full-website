@@ -13,7 +13,9 @@ public function user() {
     return $this->belongsTo(User::class, 'video_id', 'id');
 }
 
-
+ public function saveVideos(){
+    return $this->hasMany(SaveVideo::class);
+}
     public function category()
     {
         return $this->belongsTo(Category::class);

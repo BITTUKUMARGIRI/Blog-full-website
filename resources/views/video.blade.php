@@ -23,7 +23,7 @@
         </div>
     @endforeach
     @forelse($videos as $video)
-    <h3>did you mean :{{ $video->title }}</h3>
+    <!-- <h3>did you mean :{{ $video->title }}</h3> -->
 @empty
     <p>No videos found matching your search.</p>
 @endforelse

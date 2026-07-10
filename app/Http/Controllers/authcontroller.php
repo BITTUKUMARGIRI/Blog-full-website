@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Post;
+use App\Models\Save;    
+use App\Models\Video;
+use app\Models\Like;
+use app\models\SaveVideo;
 use Illuminate\Support\Facades\Hash;        
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -20,10 +25,8 @@ class authcontroller extends Controller
     ]);
 
     if ($validator->fails()) {
-        return response()->json([
-            'status' => 'error',
-            'errors' => $validator->errors()
-        ], 422);
+           return redirect()->back()->withErrors($validator)->withInput();
+
     }
 
     $user = new User();
@@ -44,11 +47,11 @@ class authcontroller extends Controller
         'password'=>'required|min:6'
     ]);
 
-    if ($validator->fails()) {
-        return response()->json([
-            'status' => 'error',
-            'errors' => $validator->errors()
-        ], 422);    }
+    // if ($validator->fails()) {
+    //     return response()->json([
+    //         'status' => 'error',
+    //         'errors' => $validator->errors()
+    //     ], 422);    }
 
     $credentials = $request->only('email', 'phone', 'password');
     if (Auth::attempt($credentials)) {
@@ -57,10 +60,9 @@ class authcontroller extends Controller
         
     } 
     else {
-        return response()->json([
-            'status' => 'error',
-            'message' => 'Invalid credentials'
-        ], 401);
+        return back()->withErrors([
+            'email' => 'The provided credentials do not match our records.',
+        ])->withInput();
     }
 
 }
@@ -72,5 +74,20 @@ class authcontroller extends Controller
     $request->session()->regenerateToken();
     return redirect('/');
 }
+public function profile()
+{
+    $user = Auth::user();
 
+    $posts = $user->posts()->latest()->get();
+    $videos = $user->videos()->latest()->get();
+
+    $savedPosts = $user->saves()
+        ->where('save', 'post')
+        ->latest()
+        ->get();
+
+       $savedVideos = $user->saveVideos()->with('video')->latest()->get();
+
+    return view('profile', compact('user', 'posts', 'videos', 'savedPosts', 'savedVideos'));
+}
 }

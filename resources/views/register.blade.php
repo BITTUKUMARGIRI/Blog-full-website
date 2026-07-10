@@ -126,6 +126,20 @@
                     <option value="admin">Admin</option>
                 </select>
             </div>
+            <div>
+                @error('name')
+                    <p style="color: red;">{{ $message }}</p>
+                @enderror
+                @error('email')             
+                    <p style="color: red;">{{ $message }}</p>
+                @enderror
+                @error('phone')
+                    <p style="color: red;">{{ $message }}</p>
+                @enderror
+                @error('password')
+                    <p style="color: red;">{{ $message }}</p>
+                @enderror
+            </div>
 
             <button type="submit" class="register-btn">Register</button>
 

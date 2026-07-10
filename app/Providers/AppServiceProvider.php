@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\support\Facades\Gate;
+use App\Models\User;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,12 +15,16 @@ class AppServiceProvider extends ServiceProvider
     {
         //
     }
+    public function boot(): void
+    {
+      //});
+    }
 
     /**
      * Bootstrap any application services.
      */
-    public function boot(): void
-    {
-        //
-    }
+    // public function boot(): void
+    // {
+    //     //
+    // }
 }

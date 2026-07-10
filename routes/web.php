@@ -38,7 +38,7 @@ USE App\Http\Controllers\VideoController;
    Route::get('/video', [VideoController::class, 'video'])->name('video')->middleware('role:admin,user');
    Route::get('/videos/{id}/manage', [VideoController::class, 'manage'])->name('manage')->middleware('role:admin');
    Route::put('/videos/{id}/edit', [VideoController::class, 'update'])->name('update')->middleware('role:admin');
-   Route::get('/videos/search', [VideoController::class, 'search'])->name('search')->middleware('role:admin');
+   Route::get('/videos/search', [VideoController::class, 'search'])->name('search')->middleware('role:admin,user');
 
    Route::get('/videos/{id}/delete', [VideoController::class, 'delete'])->name('delete')->middleware('role:admin');
 
@@ -47,3 +47,6 @@ USE App\Http\Controllers\VideoController;
    Route::get('/posts/{id}/edit',[AdminController::class,'edit'])->name('edit')->middleware('role:admin');
    Route::put('/posts/{id}/edit',[AdminController::class,'update'])->name('update')->middleware('role:admin');
    Route::get('/posts/{id}/delete',[AdminController::class,'delete'])->name('delete')->middleware('role:admin');
+   Route::post('/posts/{id}/like',[ReadController::class,'like'])->name('like')->middleware('role:admin,user');
+   Route::post('/posts/{id}/save',[VideoController::class,'save'])->name('save')->middleware('role:admin,user');
+   Route::get('/profile',[authController::class,'profile'])->name('profile')->middleware('role:admin,user');

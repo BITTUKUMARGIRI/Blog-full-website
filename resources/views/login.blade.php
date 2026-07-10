@@ -122,6 +122,17 @@
             <div class="form-group">
                 <input type="password" name="password" placeholder="Password">
             </div>
+            <div>
+             @if ($errors->any())
+                <div class="error-messages">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li style="color: red; font-size: 14px;">{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            </div>
 
             <button type="submit" class="login-btn">Login</button>
 

@@ -144,8 +144,23 @@
             </button>
 
         </div>
+        <div class="btn like-btn">
+            <form action="{{ route('save', $videos->id) }}" method="POST" style="display: inline;">
+                @csrf
+                <button type="submit" class="btn"> Save</button>
+            </form>
 
+@if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
 
+@if(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
         <!-- SLIDER -->
 
         <input

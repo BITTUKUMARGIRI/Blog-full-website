@@ -57,6 +57,13 @@ public function posts() {
 }
 
 
+public function saves(){
+    return $this->hasMany(Save::class);
+}
+public function saveVideos(){
+    return $this->hasMany(SaveVideo::class);
+}
+
 public function watchHistory() {
     return $this->hasMany(WatchHistory::class);
 }

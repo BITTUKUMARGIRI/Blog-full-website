@@ -151,6 +151,24 @@
     </style>
 </head>
 <body>
+<div class="btn like-btn">
+
+            <form action="{{ route('like', $post->id) }}" method="POST" style="display: inline;">
+                @csrf
+                <button type="submit" class="btn">Like ({{ $post->likes_count }})</button>
+            </form>
+</div>
+            @if(session('success'))
+    <div class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
+@if(session('error'))
+    <div class="alert alert-danger">
+        {{ session('error') }}
+    </div>
+@endif
 
     <div class="topbar">
         <div class="site-title">
@@ -180,6 +198,7 @@
         <div class="post-content">
             {!! html_entity_decode($post->content) !!}
         </div>
+        
        
     </div>
     
@@ -187,5 +206,6 @@
         <a href="{{ url('/') }}" class="btn">Back to Posts</a>
     </div> -->
 
+</div>
 </body>
 </html>

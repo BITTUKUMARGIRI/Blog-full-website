@@ -223,6 +223,10 @@
                     @csrf
                     <button type="submit" class="profile-btn">Logout</button>
                 </form>
+                <form   method="GET" action="{{ route('profile') }}" style="display:inline;">
+                    @csrf
+                    <button type="submit" class="profile-btn">Profile</button>
+                </form>
             </div>
         @endauth
 

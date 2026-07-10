@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Video;
+use App\Models\Post;
+use App\Models\Save;
 USE Illuminate\Support\Facades\Storage;
 USE Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
@@ -14,9 +16,8 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Notification;
+use App\Models\SaveVideo;
+
 
 
 
@@ -111,4 +112,25 @@ return view('video', ['videos' => video::all()]);
     return view('video', compact('videos'));
 }
 }
+ 
+public function save($id){
+    $video=Video::findOrfail($id);
+    $user=Auth::user();
+    if(SaveVideo::where('user_id',$user->id)->where('video_id',$video->id)->exists()){
+        return back()->with('error', 'You have already saved this video');
+    }
+    SaveVideo::create([
+        'user_id'=>$user->id,
+        'video_id'=>$video->id,
+        'save'=>'video'
+    ]);
+     
+    return back()->with('success', 'Video saved successfully');
+}
+   
+
+
+
+
+
 }
